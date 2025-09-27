@@ -22,6 +22,8 @@ RUN /bin/bash -lc "source /opt/ros/jazzy/setup.bash && colcon build --symlink-in
 
 COPY ros_entrypoint.sh /ros_entrypoint.sh
 RUN chmod +x /ros_entrypoint.sh
+RUN echo "source /opt/ros/jazzy/setup.bash" >> /root/.bashrc && \
+    echo "source /root/turtlebot4_ws/install/setup.bash" >> /root/.bashrc
 
 # 10. Set working directory and default entrypoint
 WORKDIR /
