@@ -64,5 +64,28 @@ After this, the image that is pulled can be seen using:
 ```bash
 docker images
 ```
-Then just follow the same instructions written under 
 # Running Instructions:
+
+To Run this image as a container (Please use the name of the container that you want after --name and use the name of image pulled. And give all the devices,display and permissions as required):
+
+```bash
+
+docker run -it \
+  --name ros2_jazzy_turtle_docker_pull \
+  -e DISPLAY=$DISPLAY \
+  -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+  --device /dev/dri \
+  naveensani22/ros2_jazzy_turtlebot:1.0.1
+
+```
+
+After this command, you should see the terminal of the container that is running now. And to exit the container use:
+
+```bash
+exit
+```
+
+And to later use this same container, use (use the name of the container that you named):
+
+```bash
+docker start -ai ros2_jazzy_turtle_docker_pull
