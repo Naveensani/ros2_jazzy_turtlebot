@@ -1,6 +1,8 @@
 # ros2_jazzy_turtlebot
 Repository to test out Docker Images and Container with ROS2 Jazzy
 
+# Part 1: How to clone the repo and build the image using the files (Dockerfile and others), and then running it as a container
+
 # Cloning Instructions:
 
 To clone a specific version (here v1.0.0) from Github:
@@ -54,7 +56,7 @@ And to later use this same container, use (use the name of the container that yo
 ```bash
 docker start -ai ros2_jazzy_turtle_docker
 ```
-# Doing docker pull for images 
+# Part 2: Doing docker pull for images and running it as a container
 
 ```bash
 docker pull naveensani22/ros2_jazzy_turtlebot:1.0.1
@@ -89,3 +91,21 @@ And to later use this same container, use (use the name of the container that yo
 
 ```bash
 docker start -ai ros2_jazzy_turtle_docker_pull
+```
+
+# Part 3: Updating the docker image once we do modifications:
+
+There are two ways of updating the docker image after we do modifications to it. So after we run a docker image as a container and make changes in that container, we can either commit it/save it as a new image OR we can update the earlier Dockerfile with the commands that we ran on the container to make modifications and save the new dockerfile. Then we can build the new image using it with "docker build" command.
+
+# 1st Option: Commit as an Image
+
+```bash
+docker commit Container_Name Preferred_Image_Name
+```
+# 2nd Option: Updating the Dockerfile and then building the image (Recommended)
+
+Update the Dockerfile and save it. And then go *into the directory with the Dockerfile* and do:
+
+```bash
+docker build -t DockerhubUsername/ros2_jazzy_turtlebot:1.0.0 .
+```
