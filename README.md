@@ -56,6 +56,9 @@ And to later use this same container, use (use the name of the container that yo
 ```bash
 docker start -ai ros2_jazzy_turtle_docker
 ```
+
+************
+
 # Part 2: Doing docker pull for images and running it as a container
 
 ```bash
@@ -93,7 +96,59 @@ And to later use this same container, use (use the name of the container that yo
 docker start -ai ros2_jazzy_turtle_docker_pull
 ```
 
-# Part 3: Updating the docker image once we do modifications:
+************
+
+# Part 3: Updating the docker image for the USER (fixed commands):
+
+For example, let’s take the name of the container running our image as “turtlebot_container”.
+
+1. First we pull the latest stable image:
+
+```bash
+docker pull naveensani22/ros2_jazzy_turtlebot:stable
+```
+2. Then, we have to remove the current container:
+
+```bash
+docker rm turtlebot_container
+```
+3. Then run the new image as container:
+
+```bash
+docker run -it \
+  --name turtlebot_container\
+  -e DISPLAY=$DISPLAY \
+  -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+  --device /dev/dri \
+  naveensani22/ros2_jazzy_turtlebot:stable
+
+```
+This opens a new container with the same name of the old container. But this loses all the changes that the user made in the old container.
+
+************
+
+# Documentation of how to do all of things, that we figured out while trying to do things
+
+# Part 4: This is how we created the docker container ros2_jazzy_turtle (Initially)
+
+To Allow X11/Display access:
+
+```bash
+xhost +local:docker
+```
+Running the Container:
+
+```bash
+docker run -it \
+  --name ros2_jazzy_turtlebot \
+  -e DISPLAY=$DISPLAY \
+  -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+  --device /dev/dri \
+  ros:jazzy bash
+
+```
+
+# Part : Updating the docker image once we do modifications:
 
 There are two ways of updating the docker image after we do modifications to it. So after we run a docker image as a container and make changes in that container, we can either commit it/save it as a new image OR we can update the earlier Dockerfile with the commands that we ran on the container to make modifications and save the new dockerfile. Then we can build the new image using it with "docker build" command.
 
