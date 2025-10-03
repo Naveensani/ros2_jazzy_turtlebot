@@ -470,7 +470,7 @@ docker run -it \
 ```
 This opens a new container with the same name of the old container.
 
-# Part 17: Updating the docker image once we do modifications:
+# Part 18: Updating the docker image once we do modifications:
 
 There are two ways of updating the docker image after we do modifications to it. So after we run a docker image as a container and make changes in that container, we can either commit it/save it as a new image OR we can update the earlier Dockerfile with the commands that we ran on the container to make modifications and save the new dockerfile. Then we can build the new image using it with "docker build" command.
 
