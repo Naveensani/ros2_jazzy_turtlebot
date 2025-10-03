@@ -127,7 +127,7 @@ This opens a new container with the same name of the old container. But this los
 
 ************
 
-# Documentation of how to do all of things, that we figured out while trying to do things
+# Documentation of how to do all of things, that we figured out while trying to do things (Refer Part 14 to get recommended method)
 
 # Part 4: This is how we created the docker container ros2_jazzy_turtle (Initially)
 
@@ -342,7 +342,7 @@ mount /dev/sdb1 /mnt/usb
 ls /mnt/usb   [to view the data]
 
 ```
-# Part 14: To Build a Docker Image with Dockfile and other files
+# Part 14: To Build a Docker Image with Dockfile and other files (Recommended)
 
 First write a Dockerfile like this as an example inside a folder:-
 
@@ -443,8 +443,34 @@ git tag -a v1.0.0 -m "Version 1.0.0: With Comments"
 git push origin main --tags
 
 ```
+# Part 17: To manually update the image and run it when an updated image is added in Dockerhub:
 
-# Part : Updating the docker image once we do modifications:
+
+For example, let’s take the name of the container running our image as “turtlebot_container”.
+
+First we pull the latest stable image:
+
+```bash
+docker pull naveensani22/ros2_jazzy_turtlebot:stable
+```
+Then, we have to remove the current container
+
+```bash
+docker rm turtlebot_container
+```
+Then run the new image as container:
+
+```bash
+docker run -it \
+  --name turtlebot_container\
+  -e DISPLAY=$DISPLAY \
+  -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+  --device /dev/dri \
+  naveensani22/ros2_jazzy_turtlebot:stable
+```
+This opens a new container with the same name of the old container.
+
+# Part 17: Updating the docker image once we do modifications:
 
 There are two ways of updating the docker image after we do modifications to it. So after we run a docker image as a container and make changes in that container, we can either commit it/save it as a new image OR we can update the earlier Dockerfile with the commands that we ran on the container to make modifications and save the new dockerfile. Then we can build the new image using it with "docker build" command.
 
