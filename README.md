@@ -32,6 +32,11 @@ docker images
 
 # Running Instructions:
 
+First we have to give permission to Docker for display:
+
+```bash
+ xhost +local:docker
+```
 To Run this image as a container (Please use the name of the container that you want after --name and use the name of image that you named at the end. And give all the devices,display and permissions as required):
 
 ```bash
